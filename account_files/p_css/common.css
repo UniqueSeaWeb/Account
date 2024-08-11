@@ -1,0 +1,64 @@
+/* 共通 */
+/* フォント設定 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400&display=swap');
+
+/* レイアウト */
+body {
+    height: 100vh;
+    height: 100dvh;
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", "Meiryo", "ＭＳ　Ｐゴシック", "HelveticaNeue", "Helvetica", "Arial", Sans-Serif;
+}
+
+/* ヘッダー */
+.com_headerContent {
+    display: flex;
+    align-items: center;
+    padding: 4px 12px;
+    background-color: #FFFFFF;
+}
+
+.com_headerContent>p {
+    flex-grow: 1;
+}
+
+.com_headerContent>a {
+    flex-shrink: 0;
+    display: block;
+    width: 48px;
+    height: 48px;
+}
+
+.com_typo_header {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 38px;
+    color: #2E2E2E;
+}
+
+/* フッター */
+footer {
+    padding: 12px 20px;
+    background-color: #00A08E;
+}
+
+.com_typo_footer {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+
+/* トップへリンクセクション */
+.com_linkSec {
+    display: flex;
+    padding: 24px 0 24px 30px;
+    background-color: #FFFFFF;
+}
+
+@media (min-width: 760px) {
+    .com_linkSec {
+        padding: 32px 0 32px calc(((100vw - 760px) / 1160) * 320);
+    }
+}
