@@ -76,7 +76,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         for (let i = 0; i < userDataList.length; i++) {
             if (userDataList[i].userName.includes(searchInput.value)) {
-                if (numOfMatchUsers <= 99) {
+                if (numOfMatchUsers < 50) {
                     appendUser(userDataList[i].userName, userDataList[i].userId, userDataList[i].birthday, userDataList[i].timestamp);
                 }
                 userDataList[i].searchFlg = true;
@@ -86,9 +86,9 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        if (numOfMatchUsers >= 99) {
+        if (numOfMatchUsers >= 50) {
             numOfUsersElm.innerHTML = `
-                99<ruby>件<rt>けん</rt></ruby><ruby>以上<rt>いじょう</rt></ruby>
+                50<ruby>件<rt>けん</rt></ruby><ruby>以上<rt>いじょう</rt></ruby>
             `;
         } else {
             numOfUsersElm.innerHTML = `
@@ -105,8 +105,6 @@ window.addEventListener('DOMContentLoaded', function () {
     sortUserId.addEventListener('change', function () {
         showLoader();
 
-        const userList = document.getElementById('bal_userList');
-        const numOfUsersElm = document.getElementById('bal_numOfUsers');
         let numOfUsers = 0;
 
         if (this.checked) {
@@ -119,26 +117,14 @@ window.addEventListener('DOMContentLoaded', function () {
             return parseInt(user.userId);
         }
 
-        userList.innerHTML = '';
-
         for (let i = 0; i < userDataList.length; i++) {
             if (userDataList[i].searchFlg) {
-                if (numOfUsers < 99) {
-                    appendUser(userDataList[i].userName, userDataList[i].userId, userDataList[i].birthday, userDataList[i].timestamp);
+                if (numOfUsers < 50) {
+                    setUser(userDataList[i].userName, userDataList[i].userId, userDataList[i].birthday, userDataList[i].timestamp);
                 }
 
                 numOfUsers++;
             }
-        }
-
-        if (numOfUsers >= 99) {
-            numOfUsersElm.innerHTML = `
-                99<ruby>件<rt>けん</rt></ruby><ruby>以上<rt>いじょう</rt></ruby>
-            `;
-        } else {
-            numOfUsersElm.innerHTML = `
-                ${numOfUsers}<ruby>件<rt>けん</rt></ruby>
-            `;
         }
 
         hideLoader();
@@ -148,8 +134,6 @@ window.addEventListener('DOMContentLoaded', function () {
     sortTimestamp.addEventListener('change', function () {
         showLoader();
 
-        const userList = document.getElementById('bal_userList');
-        const numOfUsersElm = document.getElementById('bal_numOfUsers');
         let numOfUsers = 0;
 
         if (this.checked) {
@@ -162,26 +146,14 @@ window.addEventListener('DOMContentLoaded', function () {
             return new Date(user.timestamp);
         }
 
-        userList.innerHTML = '';
-
         for (let i = 0; i < userDataList.length; i++) {
             if (userDataList[i].searchFlg) {
-                if (numOfUsers < 99) {
-                    appendUser(userDataList[i].userName, userDataList[i].userId, userDataList[i].birthday, userDataList[i].timestamp);
+                if (numOfUsers < 50) {
+                    setUser(userDataList[i].userName, userDataList[i].userId, userDataList[i].birthday, userDataList[i].timestamp);
                 }
 
                 numOfUsers++;
             }
-        }
-
-        if (numOfUsers >= 99) {
-            numOfUsersElm.innerHTML = `
-                99<ruby>件<rt>けん</rt></ruby><ruby>以上<rt>いじょう</rt></ruby>
-            `;
-        } else {
-            numOfUsersElm.innerHTML = `
-                ${numOfUsers}<ruby>件<rt>けん</rt></ruby>
-            `;
         }
 
         hideLoader();
@@ -189,6 +161,13 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // 再読み込みボタン押下時の処理
     reloadBtn.addEventListener('click', function () {
+        const searchInput = document.getElementById('bal_searchInput');
+        const sujestList = document.getElementById('bal_seachSujestList');
+
+        searchInput.value = '';
+        sujestList.parentElement.classList.add('bal_hideSearchSujest');
+        sujestList.innerHTML = '';
+
         getAllUsers();
     });
 
@@ -238,16 +217,16 @@ function displayUserData(users) {
             searchFlg: true
         });
 
-        if (numOfUsers < 99) {
+        if (numOfUsers < 50) {
             appendUser(users[i].userName, users[i].userId, users[i].birthday, users[i].timestamp);
         }
 
         numOfUsers++;
     }
 
-    if (numOfUsers >= 99) {
+    if (numOfUsers >= 50) {
         numOfUsersElm.innerHTML = `
-            99<ruby>件<rt>けん</rt></ruby><ruby>以上<rt>いじょう</rt></ruby>
+            50<ruby>件<rt>けん</rt></ruby><ruby>以上<rt>いじょう</rt></ruby>
         `;
     } else {
         numOfUsersElm.innerHTML = `
@@ -324,6 +303,17 @@ function appendUser(userName, userId, birthday, timestamp) {
         </div>
     `;
     userList.appendChild(li);
+}
+
+function setUser(userName, userId, birthday, timestamp) {
+    const userList = document.getElementById('bal_userList');
+
+    for (let i = 0; i < userList.children.length; i++) {
+        userList.children.item(i).getElementsByClassName('bal_userName')[0].innerText = userName;
+        userList.children.item(i).getElementsByClassName('bal_userId')[0].innerText = userId;
+        userList.children.item(i).getElementsByClassName('bal_birthday')[0].innerText = birthday;
+        userList.children.item(i).getElementsByClassName('bal_timestamp')[0].innerText = timestamp;
+    }
 }
 
 // 日付をフォーマットする関数
