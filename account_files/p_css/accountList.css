@@ -346,9 +346,13 @@ li:not(.bal_userListHidden):not(:first-of-type) {
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
 }
 
+.bal_topBtn>svg {
+    width: 64px;
+    height: 64px;
+}
+
 @media (min-width: 760px) {
     .bal_topBtn {
-        position: fixed;
         right: 48px;
         bottom: 48px;
     }
