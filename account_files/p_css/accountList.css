@@ -125,7 +125,7 @@ body {
     border-radius: 16px;
 }
 
-.bal_hideSeachSujest {
+.bal_hideSearchSujest {
     display: none;
 }
 
@@ -250,14 +250,14 @@ body {
 }
 
 .bal_listWrapper {
-    padding-top: 16px;
+    padding: 16px 0 24px;
 }
 
 .bal_userListHidden {
     display: none;
 }
 
-li:not(.bal_userListHidden):not(:first-child) {
+li:not(.bal_userListHidden):not(:first-of-type) {
     padding-top: 16px;
 }
 
@@ -330,7 +330,7 @@ li:not(.bal_userListHidden):not(:first-child) {
     }
 }
 
-.bal_typo_noUser {
+.bal_typo_error {
     font-weight: 400;
     font-size: 20px;
     line-height: 28px;

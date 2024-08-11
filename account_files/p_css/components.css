@@ -721,8 +721,8 @@
 }
 
 .c_sortLink>input+label>p {
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 16px;
+    line-height: 24px;
     font-weight: 700;
     color: #008673;
 }
@@ -753,11 +753,6 @@
     .c_sortLink>input+label:hover {
         background-color: #E9FFFC;
         cursor: pointer;
-    }
-
-    .c_sortLink>input+label>p {
-        font-size: 16px;
-        line-height: 24px;
     }
 
     .c_sortLink>input+label svg {
