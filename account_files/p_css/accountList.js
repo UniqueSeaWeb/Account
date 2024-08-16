@@ -1,8 +1,7 @@
 /** アカウント一覧 **/
-
-/* ↓開発用URL */
-const IDLIST_GAS_URL = 'https://script.google.com/macros/s/AKfycbyjYdFnxx5UZ0TEmpzlDAyEYdoumzh1G_Z1z-Z5sbLGhWRGuksGsasYXEYeuG16TDSs/exec';
-/* ↑開発用URL */
+/* ID一覧スプレッドシート：https://docs.google.com/spreadsheets/d/17_Nby4CksFtpc-d_4MTuZrHrBsBp_JqBKpbJwZvNynI/edit?gid=0#gid=0 */
+// ID一覧スプレッドシートのGASのウェブアプリURL
+const IDLIST_GAS_URL = 'https://script.google.com/macros/s/AKfycbxuO97YNrFuWkkHWLWsZU4XMC2XDkwTbC3WTmqwoP4z6lnm4jIBJOxi4A5YeZWhjqvi/exec';
 var userDataList = [];
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -77,7 +76,7 @@ window.addEventListener('DOMContentLoaded', function () {
         for (let i = 0; i < userDataList.length; i++) {
             if (userDataList[i].userName.includes(searchInput.value)) {
                 if (numOfMatchUsers < 50) {
-                    appendUser(userDataList[i].userName, userDataList[i].userId, userDataList[i].birthday, userDataList[i].timestamp);
+                    appendUser(userDataList[i].userName, userDataList[i].userId, userDataList[i].timestamp);
                 }
                 userDataList[i].searchFlg = true;
                 numOfMatchUsers++;
@@ -86,16 +85,7 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        if (numOfMatchUsers >= 50) {
-            numOfUsersElm.innerHTML = `
-                50<ruby>件<rt>けん</rt></ruby><ruby>以上<rt>いじょう</rt></ruby>
-            `;
-        } else {
-            numOfUsersElm.innerHTML = `
-                ${numOfMatchUsers}<ruby>件<rt>けん</rt></ruby>
-            `;
-        }
-
+        numOfUsersElm.innerText = numOfMatchUsers;
         sujestList.parentElement.classList.add('bal_hideSearchSujest');
 
         hideLoader();
@@ -120,7 +110,7 @@ window.addEventListener('DOMContentLoaded', function () {
         for (let i = 0; i < userDataList.length; i++) {
             if (userDataList[i].searchFlg) {
                 if (numOfUsers < 50) {
-                    setUser(userDataList[i].userName, userDataList[i].userId, userDataList[i].birthday, userDataList[i].timestamp);
+                    setUser(userDataList[i].userName, userDataList[i].userId, userDataList[i].timestamp);
                 }
 
                 numOfUsers++;
@@ -149,7 +139,7 @@ window.addEventListener('DOMContentLoaded', function () {
         for (let i = 0; i < userDataList.length; i++) {
             if (userDataList[i].searchFlg) {
                 if (numOfUsers < 50) {
-                    setUser(userDataList[i].userName, userDataList[i].userId, userDataList[i].birthday, userDataList[i].timestamp);
+                    setUser(userDataList[i].userName, userDataList[i].userId, userDataList[i].timestamp);
                 }
 
                 numOfUsers++;
@@ -213,29 +203,24 @@ function displayUserData(users) {
             userId: users[i].userId,
             userName: users[i].userName,
             timestamp: users[i].timestamp,
-            birthday: users[i].birthday,
             searchFlg: true
         });
 
-        if (numOfUsers < 50) {
-            appendUser(users[i].userName, users[i].userId, users[i].birthday, users[i].timestamp);
+        if (numOfUsers < 10) {
+            appendUser(users[i].userName, users[i].userId, users[i].timestamp);
         }
 
         numOfUsers++;
     }
 
-    if (numOfUsers >= 50) {
-        numOfUsersElm.innerHTML = `
-            50<ruby>件<rt>けん</rt></ruby><ruby>以上<rt>いじょう</rt></ruby>
-        `;
-    } else {
-        numOfUsersElm.innerHTML = `
-            ${numOfUsers}<ruby>件<rt>けん</rt></ruby>
-        `;
+    if (users.length > 10) {
+        appendSeeMoreBtn();
     }
+
+    numOfUsersElm.innerText = numOfUsers;
 }
 
-function appendUser(userName, userId, birthday, timestamp) {
+function appendUser(userName, userId, timestamp) {
     const userList = document.getElementById('bal_userList');
     let li = document.createElement('li');
     li.innerHTML = `
@@ -267,26 +252,6 @@ function appendUser(userName, userId, birthday, timestamp) {
                         <tr>
                             <td>
                                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_11_4)">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M34.6667 19.8C36.027 19.7999 37.336 20.2093 38.3258 20.9442C39.3156 21.6791 39.9113 22.6842 39.9911 23.7536L40 24V28.2C40 29.096 39.3262 29.7946 38.432 30.1138L38.2222 30.1796V35.2C38.2225 35.9064 37.8837 36.5868 37.2738 37.1048C36.6638 37.6227 35.8278 37.94 34.9333 37.993L34.6667 38H13.3333C12.4363 38.0002 11.5723 37.7334 10.9146 37.2531C10.2568 36.7728 9.85394 36.1144 9.78667 35.41L9.77778 35.2V30.181C9.29796 30.0492 8.8764 29.8115 8.56339 29.4963C8.25038 29.181 8.05913 28.8015 8.01244 28.403L8 28.2V24C7.99992 22.9287 8.51969 21.8979 9.45295 21.1184C10.3862 20.339 11.6624 19.8698 13.0204 19.807L13.3333 19.8H34.6667ZM34.5476 29.18C34.2718 29.017 33.9417 28.9207 33.5977 28.9028C33.2536 28.8849 32.9104 28.9462 32.6098 29.0792L32.4142 29.18L31.9413 29.46C31.069 29.9755 30.0168 30.268 28.9268 30.298C27.8368 30.3281 26.7613 30.0942 25.8453 29.628L25.5413 29.46L25.0667 29.18C24.7909 29.017 24.4609 28.9207 24.1168 28.9028C23.7727 28.8849 23.4295 28.9462 23.1289 29.0792L22.9333 29.18L22.4587 29.46C21.5865 29.9752 20.5347 30.2675 19.4451 30.2975C18.3554 30.3276 17.2803 30.0939 16.3644 29.628L16.0587 29.46L15.5858 29.18C15.31 29.017 14.98 28.9207 14.6359 28.9028C14.2919 28.8849 13.9486 28.9462 13.648 29.0792L13.4524 29.18L13.3333 29.25V35.2H34.6667V29.25L34.5476 29.18ZM34.6667 22.6H13.3333C12.8618 22.6 12.4097 22.7475 12.0763 23.0101C11.7429 23.2726 11.5556 23.6287 11.5556 24V26.807C12.4739 26.3239 13.5602 26.0772 14.6642 26.101C15.7683 26.1248 16.8357 26.418 17.7191 26.94L18.192 27.22C18.4997 27.4018 18.874 27.5 19.2587 27.5C19.6433 27.5 20.0176 27.4018 20.3253 27.22L20.8 26.94C21.7232 26.3947 22.846 26.1 24 26.1C25.154 26.1 26.2768 26.3947 27.2 26.94L27.6747 27.22C27.9824 27.4018 28.3567 27.5 28.7413 27.5C29.126 27.5 29.5003 27.4018 29.808 27.22L30.2809 26.94C31.1643 26.418 32.2317 26.1248 33.3358 26.101C34.4398 26.0772 35.5261 26.3239 36.4444 26.807V24C36.4444 23.6287 36.2571 23.2726 35.9237 23.0101C35.5903 22.7475 35.1382 22.6 34.6667 22.6ZM25.0667 10.28C25.8007 10.733 26.483 11.2356 27.1058 11.7822C28.0373 12.6068 29.3333 13.997 29.3333 15.6C29.3333 16.7139 28.7714 17.7822 27.7712 18.5698C26.771 19.3575 25.4145 19.8 24 19.8C22.5855 19.8 21.229 19.3575 20.2288 18.5698C19.2286 17.7822 18.6667 16.7139 18.6667 15.6C18.6667 13.997 19.9644 12.6068 20.8942 11.7822C21.517 11.2356 22.1993 10.733 22.9333 10.28C23.2411 10.0982 23.6153 10 24 10C24.3847 10 24.7589 10.0982 25.0667 10.28ZM24 13.2676C23.8452 13.389 23.6952 13.5141 23.5502 13.6428C22.704 14.3932 22.2222 15.103 22.2222 15.6C22.2222 15.9713 22.4095 16.3274 22.7429 16.5899C23.0763 16.8525 23.5285 17 24 17C24.4715 17 24.9237 16.8525 25.2571 16.5899C25.5905 16.3274 25.7778 15.9713 25.7778 15.6C25.7778 15.103 25.2978 14.3932 24.4498 13.6428C24.3048 13.5141 24.1548 13.389 24 13.2676Z" fill="#008673" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_11_4">
-                                            <rect width="48" height="48" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </td>
-                            <td>
-                                <p class="bal_typo_userContentsTtl">たんじょう日</p>
-                            </td>
-                            <td>
-                                <p class="bal_typo_userContentsDetail bal_birthday">${birthday}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M17.0768 8C17.3738 8 17.6587 8.118 17.8688 8.32804C18.0788 8.53808 18.1968 8.82296 18.1968 9.12V11.2144H30.224V9.1344C30.224 8.83736 30.342 8.55248 30.552 8.34244C30.7621 8.1324 31.047 8.0144 31.344 8.0144C31.641 8.0144 31.9259 8.1324 32.136 8.34244C32.346 8.55248 32.464 8.83736 32.464 9.1344V11.2144H36.8C37.6484 11.2144 38.4621 11.5513 39.0622 12.1511C39.6622 12.7509 39.9996 13.5644 40 14.4128V36.8016C39.9996 37.65 39.6622 38.4635 39.0622 39.0633C38.4621 39.6631 37.6484 40 36.8 40H11.2C10.3516 40 9.53789 39.6631 8.93782 39.0633C8.33775 38.4635 8.00042 37.65 8 36.8016V14.4128C8.00042 13.5644 8.33775 12.7509 8.93782 12.1511C9.53789 11.5513 10.3516 11.2144 11.2 11.2144H15.9568V9.1184C15.9572 8.82163 16.0754 8.53717 16.2854 8.32747C16.4954 8.11778 16.78 8 17.0768 8ZM10.24 20.3872V36.8016C10.24 36.9277 10.2648 37.0525 10.3131 37.169C10.3613 37.2854 10.432 37.3913 10.5212 37.4804C10.6103 37.5696 10.7162 37.6403 10.8326 37.6885C10.9491 37.7368 11.0739 37.7616 11.2 37.7616H36.8C36.9261 37.7616 37.0509 37.7368 37.1674 37.6885C37.2839 37.6403 37.3897 37.5696 37.4788 37.4804C37.568 37.3913 37.6387 37.2854 37.6869 37.169C37.7352 37.0525 37.76 36.9277 37.76 36.8016V20.4096L10.24 20.3872ZM18.6672 31.3904V34.056H16V31.3904H18.6672ZM25.3328 31.3904V34.056H22.6672V31.3904H25.3328ZM32 31.3904V34.056H29.3328V31.3904H32ZM18.6672 25.0272V27.6928H16V25.0272H18.6672ZM25.3328 25.0272V27.6928H22.6672V25.0272H25.3328ZM32 25.0272V27.6928H29.3328V25.0272H32ZM15.9568 13.4528H11.2C11.0739 13.4528 10.9491 13.4776 10.8326 13.5259C10.7162 13.5741 10.6103 13.6448 10.5212 13.734C10.432 13.8231 10.3613 13.929 10.3131 14.0454C10.2648 14.1619 10.24 14.2867 10.24 14.4128V18.1488L37.76 18.1712V14.4128C37.76 14.2867 37.7352 14.1619 37.6869 14.0454C37.6387 13.929 37.568 13.8231 37.4788 13.734C37.3897 13.6448 37.2839 13.5741 37.1674 13.5259C37.0509 13.4776 36.9261 13.4528 36.8 13.4528H32.464V14.9392C32.464 15.2362 32.346 15.5211 32.136 15.7312C31.9259 15.9412 31.641 16.0592 31.344 16.0592C31.047 16.0592 30.7621 15.9412 30.552 15.7312C30.342 15.5211 30.224 15.2362 30.224 14.9392V13.4528H18.1968V14.9248C18.1968 15.2218 18.0788 15.5067 17.8688 15.7168C17.6587 15.9268 17.3738 16.0448 17.0768 16.0448C16.7798 16.0448 16.4949 15.9268 16.2848 15.7168C16.0748 15.5067 15.9568 15.2218 15.9568 14.9248V13.4528Z" fill="#008673" />
                                 </svg>
                             </td>
@@ -305,13 +270,12 @@ function appendUser(userName, userId, birthday, timestamp) {
     userList.appendChild(li);
 }
 
-function setUser(userName, userId, birthday, timestamp) {
+function setUser(userName, userId, timestamp) {
     const userList = document.getElementById('bal_userList');
 
     for (let i = 0; i < userList.children.length; i++) {
         userList.children.item(i).getElementsByClassName('bal_userName')[0].innerText = userName;
         userList.children.item(i).getElementsByClassName('bal_userId')[0].innerText = userId;
-        userList.children.item(i).getElementsByClassName('bal_birthday')[0].innerText = birthday;
         userList.children.item(i).getElementsByClassName('bal_timestamp')[0].innerText = timestamp;
     }
 }
@@ -333,6 +297,24 @@ function formatDate(date) {
 
     // フォーマット済みの日付文字列を返す
     return output;
+}
+
+// もっとみるボタンを表示する関数
+function appendSeeMoreBtn() {
+    const userList = document.getElementById('bal_userList');
+    let li = document.createElement('li');
+    li.innerHTML = `
+        <a href="javascript:void(0);" tabindex="0" class="bal_seeMoreBtn" id="bal_seeMoreBtn">
+            <p>もっとみる</p>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M13 4C13 3.44772 12.5523 3 12 3C11.4477 3 11 3.44772 11 4L13 4ZM11.2929 20.7071C11.6834 21.0976 12.3166 21.0976 12.7071 20.7071L19.0711 14.3431C19.4616 13.9526 19.4616 13.3195 19.0711 12.9289C18.6805 12.5384 18.0474 12.5384 17.6569 12.9289L12 18.5858L6.34315 12.9289C5.95262 12.5384 5.31946 12.5384 4.92893 12.9289C4.53841 13.3195 4.53841 13.9526 4.92893 14.3431L11.2929 20.7071ZM11 4L11 20L13 20L13 4L11 4Z"
+                    fill="#008673" />
+            </svg>
+        </a>
+    `;
+    userList.appendChild(li);
 }
 
 // エラーを表示する関数
