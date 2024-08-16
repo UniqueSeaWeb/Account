@@ -298,7 +298,7 @@ li:not(.bal_userListHidden):not(:first-of-type) {
 }
 
 .bal_userCardContents tr>td:nth-child(2) {
-    width: 88px;
+    width: 92px;
     padding-left: 4px;
 }
 
@@ -322,7 +322,7 @@ li:not(.bal_userListHidden):not(:first-of-type) {
 
 @media (min-width: 760px) {
     .bal_userCardContents tr>td:nth-child(2) {
-        width: 100px;
+        width: 108px;
     }
 
     .bal_typo_userContentsTtl {
