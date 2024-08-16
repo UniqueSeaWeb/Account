@@ -2,6 +2,7 @@
 body {
     height: 100lvh;
     background-color: #d4edd6;
+    overflow-y: auto;
 }
 
 .bal_headerContent {
