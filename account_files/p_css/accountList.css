@@ -269,7 +269,7 @@ body {
     }
 
     .bal_userList>li {
-        flex-basis: calc((100% - 24px) / 2);
+        flex-basis: calc(50%);
         flex-shrink: 0;
     }
 
