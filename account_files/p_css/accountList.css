@@ -1,8 +1,13 @@
 /** アカウント一覧 **/
 body {
-    height: 100lvh;
+    display: flex;
+    flex-direction: column;
+    height: 100svh;
     background-color: #d4edd6;
-    overflow-y: auto;
+}
+
+main {
+    flex-grow: 1;
 }
 
 .bal_headerContent {
