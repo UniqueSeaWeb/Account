@@ -13,7 +13,7 @@ body {
 /* タイトルセクション */
 .bal_ttlSec {
     width: 100%;
-    max-width: 592px;
+    max-width: 800px;
     margin: 0 auto;
     padding-top: 24px;
 }
@@ -68,7 +68,7 @@ body {
 /* 一覧セクション */
 .bal_listSec {
     width: 100%;
-    max-width: 592px;
+    max-width: 800px;
     margin: 0 auto;
     padding-top: 24px;
 }
@@ -101,7 +101,6 @@ body {
 
 .bal_searchInput {
     width: 100%;
-    max-width: 448px;
     padding: 13px;
     border: 3px solid #F2FAF9;
     border-radius: 16px;
@@ -258,8 +257,37 @@ body {
     display: none;
 }
 
-li:not(.bal_userListHidden):not(:first-of-type) {
+.bal_userList>li:not(:first-child) {
     padding-top: 16px;
+}
+
+@media (min-width: 760px) {
+    .bal_userList {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .bal_userList>li {
+        flex-basis: calc((100% - 24px) / 2);
+        flex-shrink: 0;
+    }
+
+    .bal_userList>li:nth-child(odd) {
+        padding-right: 12px;
+    }
+
+    .bal_userList>li:nth-child(even) {
+        padding-left: 12px;
+    }
+
+    .bal_userList>li:not(:first-child) {
+        padding-top: 0;
+    }
+
+    .bal_userList>li:nth-child(n + 3) {
+        padding-top: 16px;
+    }
 }
 
 .bal_userCard {
@@ -288,6 +316,11 @@ li:not(.bal_userListHidden):not(:first-of-type) {
     padding-top: 8px;
 }
 
+.bal_userCardContents>table {
+    width: 100%;
+    table-layout: fixed;
+}
+
 .bal_userCardContents svg {
     width: 24px;
     height: 24px;
@@ -297,8 +330,12 @@ li:not(.bal_userListHidden):not(:first-of-type) {
     padding-top: 8px;
 }
 
+.bal_userCardContents tr>td:nth-child(1) {
+    width: 24px;
+}
+
 .bal_userCardContents tr>td:nth-child(2) {
-    width: 92px;
+    width: 88px;
     padding-left: 4px;
 }
 
@@ -322,7 +359,7 @@ li:not(.bal_userListHidden):not(:first-of-type) {
 
 @media (min-width: 760px) {
     .bal_userCardContents tr>td:nth-child(2) {
-        width: 108px;
+        width: 100px;
     }
 
     .bal_typo_userContentsTtl {
