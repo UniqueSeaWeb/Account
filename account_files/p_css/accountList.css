@@ -336,12 +336,12 @@ body {
 }
 
 .bal_userCardContents tr>td:nth-child(2) {
-    width: 88px;
+    width: 96px;
     padding-left: 4px;
 }
 
 .bal_userCardContents tr>td:nth-child(3) {
-    padding-left: 16px;
+    padding-left: 8px;
 }
 
 .bal_typo_userContentsTtl {
@@ -360,7 +360,7 @@ body {
 
 @media (min-width: 760px) {
     .bal_userCardContents tr>td:nth-child(2) {
-        width: 100px;
+        width: 108px;
     }
 
     .bal_typo_userContentsTtl {
