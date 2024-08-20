@@ -195,10 +195,11 @@ function displayUserData(users) {
             userId: users[i].userId,
             userName: users[i].userName,
             timestamp: users[i].timestamp,
+            birthday: users[i].birthday,
             searchFlg: true
         });
 
-        appendUser(users[i].userName, users[i].userId, users[i].timestamp);
+        appendUser(users[i].userId, users[i].userName, users[i].timestamp, users[i].birthday, );
 
         numOfUsers++;
     }
@@ -206,7 +207,7 @@ function displayUserData(users) {
     numOfUsersElm.innerText = numOfUsers;
 }
 
-function appendUser(userName, userId, timestamp) {
+function appendUser(userId, userName, timestamp, birthday) {
     const userList = document.getElementById('bal_userList');
     let li = document.createElement('li');
     // li.innerHTML = `
@@ -288,7 +289,7 @@ function appendUser(userName, userId, timestamp) {
                                 <p>誕生日の日にち</p>
                             </th>
                             <td>
-                                <p class="bal_birthday">----/--/-- --:--</p>
+                                <p class="bal_birthday">${birthday}</p>
                             </td>
                         </tr>
                     </tbody>
