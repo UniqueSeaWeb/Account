@@ -199,7 +199,7 @@ function displayUserData(users) {
             searchFlg: true
         });
 
-        appendUser(users[i].userId, users[i].userName, formatDate(new Date(users[i].timestamp)), users[i].birthday);
+        appendUser(users[i].userId, users[i].userName, users[i].timestamp, users[i].birthday);
 
         numOfUsers++;
     }
@@ -251,26 +251,6 @@ function appendUser(userId, userName, timestamp, birthday) {
         </div>
     `;
     userList.appendChild(li);
-}
-
-// 日付をフォーマットする関数
-function formatDate(date) {
-    // 出力文字列を初期化
-    let output = '';
-
-    // 年、月、日、時、分、秒を取得
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
-
-    // 出力文字列を組み立て
-    output = year + '/' + month + '/' + day + ' ' + hours + ':' + minutes + ':' + seconds;
-
-    // フォーマット済みの日付文字列を返す
-    return output;
 }
 
 // エラーを表示する関数
