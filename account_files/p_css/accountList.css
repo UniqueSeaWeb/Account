@@ -391,6 +391,7 @@ main {
 
 .bal_userTable {
     table-layout: fixed;
+    width: 100%;
 }
 
 .bal_userTable th {
