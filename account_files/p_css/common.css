@@ -5,7 +5,7 @@
 /* レイアウト */
 body {
     height: 100vh;
-    height: 100dvh;
+    height: 100lvh;
     font-family: "Noto Sans JP", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", "Meiryo", "ＭＳ　Ｐゴシック", "HelveticaNeue", "Helvetica", "Arial", Sans-Serif;
 }
 

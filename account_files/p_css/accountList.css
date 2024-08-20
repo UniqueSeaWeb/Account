@@ -213,15 +213,6 @@ main {
     padding-top: 24px;
 }
 
-.bal_sortLinks {
-    display: flex;
-    align-items: center;
-}
-
-.bal_sortLinks>.bal_sortLink:not(:first-child) {
-    padding-left: 16px;
-}
-
 .bal_reloadBtn {
     transition: cubic-bezier(0, 0.2, 0.4, 1) 200ms;
 }
@@ -296,7 +287,7 @@ main {
     }
 }
 
-.bal_userCard {
+/* .bal_userCard {
     padding: 16px;
     border-radius: 24px;
     background-color: #FFFFFF;
@@ -377,56 +368,56 @@ main {
         font-size: 16px;
         line-height: 24px;
     }
-}
+} */
 
-/* もっとみるボタン */
-.bal_seeMoreBtn {
+.bal_userCard {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 16px 0;
-    border-radius: 28px;
+    padding: 16px;
+    border-radius: 24px;
     background-color: #FFFFFF;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
 }
 
-.bal_seeMoreBtn>p {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 24px;
-    color: #008673;
+.bal_userCard>img {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
 }
 
-.bal_seeMoreBtn>svg {
-    flex-shrink: 0;
-    width: 24px;
-    height: 24px;
+.bal_userTableWrapper {
+    flex-grow: 1;
+    padding-left: 8px;
+}
+
+.bal_userTable {
+    table-layout: fixed;
+}
+
+.bal_userTable th {
+    width: 98px;
+}
+
+.bal_userTable td {
+    padding-left: 8px;
+}
+
+.bal_userTable th>p {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: #2E2E2E;
+}
+
+.bal_userTable td>p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #2E2E2E;
 }
 
 .bal_typo_error {
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 28px;
-    color: #585858;
-    text-align: center;
-}
-
-.bal_topBtn {
-    position: fixed;
-    right: 20px;
-    bottom: 24px;
-    border-radius: 50%;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
-}
-
-.bal_topBtn>svg {
-    width: 64px;
-    height: 64px;
-}
-
-@media (min-width: 760px) {
-    .bal_topBtn {
-        right: 48px;
-        bottom: 48px;
-    }
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: #ff4545;
 }
