@@ -10,8 +10,8 @@ window.addEventListener('DOMContentLoaded', function () {
     const sortUserName = document.getElementById('bal_sortUserName'); // なまえでならべかえリンク
     const reloadBtn = document.getElementById('bal_reloadBtn'); // 再読み込みボタン
 
-    // ローダーを生成
-    createLoader('よみこみ<ruby>中<rt>ちゅう</rt></ruby>');
+    // // ローダーを生成
+    // createLoader('よみこみ<ruby>中<rt>ちゅう</rt></ruby>');
     // 全てのユーザーデータを取得
     getAllUsers();
 
@@ -161,7 +161,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 // 全てユーザー情報を取得する関数
 async function getAllUsers() {
-    showLoader();
+    // showLoader();
 
     const newUrl = setQueryParams(IDLIST_GAS_URL, { action: 'getAllUsers' });
 
@@ -177,7 +177,7 @@ async function getAllUsers() {
     } catch (e) {
         showError(`つうしんエラーがはっせいしました。\nインターネットにつながっているかかくにんしてください\n\n${e.message}\n>Didn't get user data`);
     } finally {
-        hideLoader();
+        // hideLoader();
     }
 }
 
