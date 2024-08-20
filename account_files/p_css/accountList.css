@@ -371,22 +371,36 @@ main {
 } */
 
 .bal_userCard {
-    display: flex;
     padding: 16px;
     border-radius: 24px;
     background-color: #FFFFFF;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
 }
 
-.bal_userCard>img {
-    flex-shrink: 0;
-    width: 48px;
-    height: 48px;
+.bal_userCardTop {
+    display: flex;
+    align-items: center;
 }
 
-.bal_userTableWrapper {
-    flex-grow: 1;
+.bal_userCardTop>img {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+}
+
+.bal_userCardTtl {
     padding-left: 8px;
+}
+
+.bal_userCardTtl>p {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: #2E2E2E;
+}
+
+.bal_userCardBottom {
+    padding: 8px 0 0 8px;
 }
 
 .bal_userTable {
@@ -395,7 +409,7 @@ main {
 }
 
 .bal_userTable th {
-    width: 100px;
+    width: 148px;
 }
 
 .bal_userTable td {

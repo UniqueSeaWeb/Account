@@ -1,7 +1,7 @@
 /** アカウント一覧 **/
 /* ID一覧スプレッドシート：https://docs.google.com/spreadsheets/d/17_Nby4CksFtpc-d_4MTuZrHrBsBp_JqBKpbJwZvNynI/edit?gid=0#gid=0 */
 // ID一覧スプレッドシートのGASのウェブアプリURL
-const IDLIST_GAS_URL = 'https://script.google.com/macros/s/AKfycbyjYdFnxx5UZ0TEmpzlDAyEYdoumzh1G_Z1z-Z5sbLGhWRGuksGsasYXEYeuG16TDSs/exec';
+const IDLIST_GAS_URL = 'https://script.google.com/macros/s/AKfycbwRQpYsz47UnhpZlz5Kcnnsgtph5RCH63pcBJyUllQbmpTIeIGv54veQfJncZOtz6d2/exec';
 var userDataList = [];
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -199,7 +199,7 @@ function displayUserData(users) {
             searchFlg: true
         });
 
-        appendUser(users[i].userId, users[i].userName, formatDate(new Date(users[i].timestamp)), users[i].birthday, );
+        appendUser(users[i].userId, users[i].userName, formatDate(new Date(users[i].timestamp)), users[i].birthday);
 
         numOfUsers++;
     }
@@ -212,8 +212,13 @@ function appendUser(userId, userName, timestamp, birthday) {
     let li = document.createElement('li');
     li.innerHTML = `
         <div class="bal_userCard">
-            <img src="../account_files/p_image/person.svg">
-            <div class="bal_userTableWrapper">
+            <div class="bal_userCardTop">
+                <img src="../account_files/p_image/person.svg?20240801">
+                <div class="bal_userCardTtl">
+                    <p class="bal_userName">${userName}</p>
+                </div>
+            </div>
+            <div class="bal_userCardBottom">
                 <table class="bal_userTable">
                     <tbody>
                         <tr>
@@ -226,15 +231,7 @@ function appendUser(userId, userName, timestamp, birthday) {
                         </tr>
                         <tr>
                             <th>
-                                <p>なまえ</p>
-                            </th>
-                            <td>
-                                <p class="bal_userName">${userName}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <p>タイムスタンプ</p>
+                                <p>とうろくにちじ</p>
                             </th>
                             <td>
                                 <p class="bal_timestamp">${timestamp}</p>
@@ -242,7 +239,7 @@ function appendUser(userId, userName, timestamp, birthday) {
                         </tr>
                         <tr>
                             <th>
-                                <p>誕生日の日にち</p>
+                                <p>たんじょうびのひにち</p>
                             </th>
                             <td>
                                 <p class="bal_birthday">${birthday}</p>
