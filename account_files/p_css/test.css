@@ -1,0 +1,23 @@
+.pt_flex {
+    display: flex;
+    background-color: red;
+}
+
+.pt_typo_text {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: #2E2E2E;
+    background-color: yellow;
+}
+
+.pt_widthArea {
+    padding-top: 24px;
+}
+
+.pt_typo_width {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+    color: #2E2E2E;
+}
