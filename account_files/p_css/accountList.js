@@ -10,8 +10,8 @@ window.addEventListener('DOMContentLoaded', function () {
     const sortUserName = document.getElementById('bal_sortUserName'); // なまえでならべかえリンク
     const reloadBtn = document.getElementById('bal_reloadBtn'); // 再読み込みボタン
 
-    // // ローダーを生成
-    // createLoader('よみこみ<ruby>中<rt>ちゅう</rt></ruby>');
+    // ローダーを生成
+    createLoader('よみこみ<ruby>中<rt>ちゅう</rt></ruby>');
     // 全てのユーザーデータを取得
     getAllUsers();
 
@@ -161,7 +161,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 // 全てユーザー情報を取得する関数
 async function getAllUsers() {
-    // showLoader();
+    showLoader();
 
     const newUrl = setQueryParams(IDLIST_GAS_URL, { action: 'getAllUsers' });
 
@@ -177,7 +177,7 @@ async function getAllUsers() {
     } catch (e) {
         showError(`つうしんエラーがはっせいしました。\nインターネットにつながっているかかくにんしてください\n\n${e.message}\n>Didn't get user data`);
     } finally {
-        // hideLoader();
+        hideLoader();
     }
 }
 
@@ -185,7 +185,6 @@ async function getAllUsers() {
 function displayUserData(users) {
     const userList = document.getElementById('bal_userList');
     const numOfUsersElm = document.getElementById('bal_numOfUsers');
-    let numOfUsers = 0;
 
     userList.innerHTML = '';
     userDataList = [];
@@ -199,12 +198,13 @@ function displayUserData(users) {
             searchFlg: true
         });
 
-        appendUser(users[i].userId, users[i].userName, users[i].timestamp, users[i].birthday);
-
-        numOfUsers++;
+        // 最大10人表示
+        if (i < 10) {
+            appendUser(users[i].userId, users[i].userName, users[i].timestamp, users[i].birthday);
+        }
     }
 
-    numOfUsersElm.innerText = numOfUsers;
+    numOfUsersElm.innerText = users.length;
 }
 
 function appendUser(userId, userName, timestamp, birthday) {
